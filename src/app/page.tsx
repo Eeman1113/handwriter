@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import Logo from '@/components/Logo';
 import * as hw from '@/lib/handwriting';
 import type { Line } from '@/lib/handwriting';
 import { download, filenameFor, toPNG, toSVG, type LayoutOptions } from '@/lib/render';
@@ -9,6 +10,17 @@ const MODEL_URL = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/d.bin`;
 
 const SAMPLE = `The quick brown fox
 jumps over the lazy dog.`;
+
+/** Everyday pen colours, so the colour picker is a fallback rather than the only way in. */
+const INKS = [
+  { name: 'Blue-black', value: '#1a2a6c' },
+  { name: 'Black', value: '#16161a' },
+  { name: 'Royal blue', value: '#2449c4' },
+  { name: 'Graphite', value: '#5e5e66' },
+  { name: 'Red', value: '#b3261e' },
+  { name: 'Green', value: '#1b6b4a' },
+  { name: 'Violet', value: '#5a2d82' },
+];
 
 type Align = LayoutOptions['align'];
 
@@ -108,7 +120,9 @@ export default function Page() {
   return (
     <div className="wrap">
       <header>
-        <h1>handwriter</h1>
+        <h1>
+          <Logo />
+        </h1>
         <p className="tagline">
           Text into real handwriting. Download it as a transparent SVG or PNG.
         </p>
@@ -189,12 +203,27 @@ export default function Page() {
           />
         </div>
 
-        <div className="field">
+        <div className="field span">
           <label htmlFor="ink">Ink</label>
-          <input
-            id="ink" type="color" value={color}
-            onChange={(e) => setColor(e.target.value)} aria-label="Ink colour"
-          />
+          <div className="inks">
+            {INKS.map((ink) => (
+              <button
+                key={ink.value}
+                type="button"
+                className="swatch"
+                style={{ background: ink.value }}
+                aria-label={ink.name}
+                aria-pressed={color.toLowerCase() === ink.value}
+                title={ink.name}
+                onClick={() => setColor(ink.value)}
+              />
+            ))}
+            <input
+              id="ink" type="color" value={color} className="swatch custom"
+              onChange={(e) => setColor(e.target.value)}
+              aria-label="Custom ink colour" title="Custom colour"
+            />
+          </div>
         </div>
 
         <div className="field span">

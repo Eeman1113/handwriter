@@ -45,10 +45,19 @@ body {
 header { margin-bottom: 28px; }
 
 h1 {
-  margin: 0 0 4px;
-  font-size: 22px;
-  font-weight: 650;
-  letter-spacing: -0.01em;
+  margin: 0 0 6px;
+  /* the wordmark is an SVG, so the heading is just a box for it */
+  line-height: 0;
+}
+
+/* Written by the engine; inherits the page text colour via currentColor,
+   which makes it black on light and white on dark. */
+.logo {
+  display: block;
+  height: 38px;
+  width: auto;
+  color: var(--text);
+  overflow: visible;
 }
 
 .tagline { margin: 0; color: var(--muted); font-size: 14px; }
@@ -107,6 +116,9 @@ textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
 
 .field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
 
+/* Fields that need the extra room: the ink row and the alignment switch. */
+.field.span { grid-column: span 2; }
+
 .field > label {
   display: flex;
   justify-content: space-between;
@@ -119,7 +131,7 @@ textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
 
 .field .value { font-variant-numeric: tabular-nums; font-weight: 450; }
 
-select, input[type="color"] {
+select {
   width: 100%;
   height: 38px;
   padding: 0 10px;
@@ -130,7 +142,41 @@ select, input[type="color"] {
   font: inherit;
 }
 
-input[type="color"] { padding: 3px; cursor: pointer; }
+/* --- ink swatches --- */
+.inks { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+.swatch {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-clip: padding-box;
+}
+
+.swatch[aria-pressed="true"] {
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent);
+}
+
+/* The native colour input, shrunk into a round swatch that matches the rest. */
+.swatch.custom {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  overflow: hidden;
+  background: conic-gradient(from 0deg, #e23b3b, #e2c53b, #3be24f, #3bc5e2, #4f3be2, #e23bc5, #e23b3b);
+}
+
+.swatch.custom::-webkit-color-swatch-wrapper { padding: 0; }
+.swatch.custom::-webkit-color-swatch { border: 0; border-radius: 50%; opacity: 0; }
+.swatch.custom::-moz-color-swatch { border: 0; border-radius: 50%; opacity: 0; }
+
+@media (hover: hover) {
+  .swatch:hover { border-color: var(--muted); }
+}
 
 input[type="range"] {
   width: 100%;
@@ -197,10 +243,11 @@ footer a { color: inherit; }
 /* --- mobile --- */
 @media (max-width: 640px) {
   .wrap { padding: 22px 16px 56px; }
-  h1 { font-size: 20px; }
+  .logo { height: 32px; }
   .controls { grid-template-columns: 1fr 1fr; gap: 14px; padding: 14px; }
   .field.span { grid-column: 1 / -1; }
   .preview { min-height: 150px; padding: 14px; }
+  .swatch, .swatch.custom { width: 34px; height: 34px; }
   button.action { flex: 1 1 100%; }
   /* keep iOS from zooming when the textarea is focused */
   textarea { font-size: 16px; }

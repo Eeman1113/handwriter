@@ -15,7 +15,9 @@ look related rather than identical.
 - **Transparent exports** — nothing paints a background, so the writing drops
   straight onto whatever you place it over. SVG stays vector; PNG renders at 3×.
 - **80 hands** to pick from, plus controls for neatness, size, line spacing,
-  pen width, ink colour and alignment.
+  pen width and alignment.
+- **Preset inks** — seven everyday pen colours a tap away, with a colour picker
+  behind them for anything else.
 - **Runs entirely in the browser.** No API, no key, no upload — the model is
   2.5 MB of weights fetched once and run client-side.
 - Works on phones.
@@ -53,7 +55,14 @@ site from a subpath. Hosting at a domain root instead? Drop that variable.
 | `src/lib/handwriting.js` | The network. Decodes the weights, runs the RNN, returns strokes. No DOM. |
 | `src/lib/render.ts` | Lays strokes out into lines and turns them into SVG, then PNG. |
 | `src/app/page.tsx` | The interface. |
+| `src/components/Logo.tsx` | The wordmark — written by the engine, baked at a fixed seed. |
 | `public/d.bin` | Model weights (2.5 MB). |
+
+The logo is not set in a typeface: it is the word *handwriter* run through the
+same network, frozen at style 9 / seed 3 so it looks identical on every visit
+and never waits on the model to load. Its strokes use `currentColor`, so it is
+black on light and white on dark. Regenerate it with
+`node scripts/make-logo.mjs`.
 
 `generate()` returns stroke geometry in abstract model units with the baseline
 at `y = 0` and `y` pointing up; `render.ts` flips the axis and scales it. That
