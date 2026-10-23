@@ -1,6 +1,8 @@
 /**
  * Turns the engine's stroke geometry into SVG, and SVG into PNG.
  *
+ * Author: Eeman Majumder <eeman.majumder@gmail.com>
+ *
  * Both exports are transparent: nothing ever paints a background, so the
  * writing drops straight onto whatever it is placed over.
  */

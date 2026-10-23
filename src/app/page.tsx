@@ -1,6 +1,13 @@
+/**
+ * handwriter — text to handwriting generator.
+ *
+ * Author: Eeman Majumder <eeman.majumder@gmail.com>
+ * https://github.com/Eeman1113/handwriter
+ */
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import Link from 'next/link';
 import Logo from '@/components/Logo';
 import * as hw from '@/lib/handwriting';
 import type { Line } from '@/lib/handwriting';
@@ -265,7 +272,7 @@ export default function Page() {
         <p>
           Every rendering is sampled fresh from a recurrent mixture-density network, so
           the same word is never written the same way twice. Both downloads have a fully
-          transparent background.
+          transparent background. <Link href="/how-it-works/">How it works →</Link>
         </p>
       </footer>
     </div>

@@ -3,6 +3,30 @@
   "version": "1.0.0",
   "private": true,
   "description": "Turn text into real handwriting and download it as transparent SVG or PNG",
+  "author": "Eeman Majumder <eeman.majumder@gmail.com> (https://github.com/Eeman1113)",
+  "license": "MIT",
+  "homepage": "https://eeman1113.github.io/handwriter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Eeman1113/handwriter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Eeman1113/handwriter/issues"
+  },
+  "keywords": [
+    "text-to-handwriting",
+    "handwriting",
+    "handwriting-generator",
+    "handwriting-synthesis",
+    "svg",
+    "png",
+    "transparent",
+    "neural-network",
+    "rnn",
+    "mixture-density-network",
+    "nextjs",
+    "generator"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",

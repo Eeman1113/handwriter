@@ -240,6 +240,45 @@ footer {
 
 footer a { color: inherit; }
 
+@media (hover: hover) {
+  footer a:hover { color: var(--text); }
+}
+
+.logo-link { display: inline-block; color: var(--text); }
+
+/* --- the how-it-works page --- */
+.prose { max-width: 680px; }
+
+.prose h1 {
+  margin: 26px 0 14px;
+  font-size: 26px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.prose h2 {
+  margin: 36px 0 10px;
+  font-size: 17px;
+  font-weight: 620;
+  letter-spacing: -0.005em;
+}
+
+.prose h3 { margin: 24px 0 6px; font-size: 15px; font-weight: 600; }
+
+.prose p { margin: 0 0 14px; color: var(--muted); line-height: 1.65; }
+
+.prose .lead { font-size: 17px; color: var(--text); line-height: 1.6; }
+
+.prose a { color: var(--text); text-decoration-color: var(--border); }
+
+.prose dl { margin: 0 0 14px; }
+.prose dt { margin-top: 14px; font-weight: 600; font-size: 14px; }
+.prose dd { margin: 4px 0 0; color: var(--muted); line-height: 1.65; }
+
+.prose .back { margin-top: 36px; }
+.prose .back a { font-weight: 550; }
+
 /* --- mobile --- */
 @media (max-width: 640px) {
   .wrap { padding: 22px 16px 56px; }
@@ -251,4 +290,214 @@ footer a { color: inherit; }
   button.action { flex: 1 1 100%; }
   /* keep iOS from zooming when the textarea is focused */
   textarea { font-size: 16px; }
+}
+
+/* ---------------------------------------------------------------
+   Figures on the "How it works" page
+   Author: Eeman Majumder
+   --------------------------------------------------------------- */
+
+.fig {
+  margin: 24px 0 30px;
+  padding: 20px 18px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.fig svg { display: block; max-width: 100%; height: auto; overflow: visible; }
+
+.fig .ink {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.fig .ink.thin { stroke-width: 2.4; }
+
+.fig figcaption {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* --- the writing animation --- */
+.fig-writing svg { margin: 0 auto; max-height: 120px; }
+
+.fig .draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-stroke 0.5s ease-out forwards;
+}
+
+@keyframes draw-stroke { to { stroke-dashoffset: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fig .draw { animation: none; stroke-dashoffset: 0; }
+}
+
+/* --- stacked renderings --- */
+.fig-stack { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.fig-stack svg { max-height: 54px; }
+
+/* --- pen path anatomy --- */
+.fig .pen-up {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.4;
+  stroke-dasharray: 4 4;
+}
+
+.fig .dot { fill: var(--surface); stroke: var(--text); stroke-width: 1.1; opacity: 0.85; }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend i { display: inline-block; width: 20px; height: 0; }
+.legend .k-line { border-top: 2px solid var(--text); }
+.legend .k-dash { border-top: 2px dashed var(--muted); }
+.legend .k-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--surface); border: 1.4px solid var(--text);
+}
+
+/* --- labelled rows (neatness ladder) --- */
+.fig-rows { display: flex; flex-direction: column; gap: 10px; }
+.fig-row { display: flex; align-items: center; gap: 14px; }
+.fig-row svg { max-height: 46px; }
+
+.row-label {
+  flex: 0 0 38px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  text-align: right;
+}
+
+.axis {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0 0 52px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.axis .rule { flex: 1; height: 1px; background: var(--border); }
+
+/* --- grid of hands --- */
+.fig-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 16px 18px;
+}
+
+.fig-cell { display: flex; flex-direction: column; gap: 6px; }
+.fig-cell svg { max-height: 42px; }
+.cell-label { font-size: 11px; color: var(--muted); }
+
+/* --- multi-line anatomy --- */
+.fig .guide { stroke: var(--border); stroke-width: 1; }
+.fig .guide.faint { stroke-dasharray: 3 5; }
+.fig .measure line { stroke: var(--muted); stroke-width: 1; opacity: 0.7; }
+.fig .tag { fill: var(--muted); font-size: 9px; font-family: inherit; }
+
+/* --- transparency panes --- */
+.fig-compose {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.pane {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 92px;
+  padding: 18px 12px 24px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.pane svg { max-height: 40px; }
+
+.pane-label {
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.pane.checker {
+  background-color: var(--surface);
+  background-image:
+    linear-gradient(45deg, var(--checker) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--checker) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--checker) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--checker) 75%);
+  background-size: 14px 14px;
+  background-position: 0 0, 0 7px, 7px -7px, -7px 0;
+}
+
+.pane.paper { background: #f3efe4; }
+.pane.photo { background: linear-gradient(135deg, #2f4858 0%, #6a7b8c 50%, #c9b79c 100%); }
+
+/* These two panes have their own backgrounds, so the ink is fixed, not themed. */
+.pane.paper .ink { stroke: #1a2a6c; }
+.pane.photo .ink { stroke: #ffffff; }
+.pane.paper .pane-label { color: #8a8372; }
+.pane.photo .pane-label { color: rgba(255, 255, 255, 0.85); }
+
+/* --- pipeline --- */
+.pipeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.pipeline li {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.step-n {
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  opacity: 0.8;
+}
+
+.step-k { font-size: 14px; font-weight: 600; }
+.step-d { font-size: 12px; color: var(--muted); line-height: 1.45; }
+
+@media (max-width: 640px) {
+  .fig { padding: 16px 14px 12px; }
+  .fig-row { gap: 10px; }
+  .row-label { flex-basis: 32px; }
+  .axis { margin-left: 42px; }
 }

@@ -57,6 +57,10 @@ site from a subpath. Hosting at a domain root instead? Drop that variable.
 | `src/app/page.tsx` | The interface. |
 | `src/components/Logo.tsx` | The wordmark — written by the engine, baked at a fixed seed. |
 | `src/app/icon.svg` | Favicon: a handwritten `h`, also engine-made. |
+| `src/app/how-it-works/` | An illustrated explanation of the model. |
+| `src/components/Figures.tsx` | The diagrams on that page. |
+| `src/lib/figures.ts` | Generated figure geometry — do not edit by hand. |
+| `src/lib/seo.ts` | Metadata, keywords and JSON-LD structured data. |
 | `public/d.bin` | Model weights (2.5 MB). |
 
 The logo is not set in a typeface: it is the word *handwriter* run through the
@@ -71,9 +75,26 @@ on light tab bars and light on dark ones. The iOS touch icon cannot be
 transparent, so it gets a solid ink tile instead:
 
 ```bash
-node scripts/make-icon.mjs        # writes src/app/icon.svg
+node scripts/make-icon.mjs          # writes src/app/icon.svg
 python3 scripts/make-apple-icon.py  # then src/app/apple-icon.png (needs Pillow)
 ```
+
+## The diagrams
+
+The figures on the *How it works* page are not illustrations — each one is real
+output from the engine, measured and baked at a fixed seed by
+`scripts/make-figures.mjs`. The pen-path diagram shows actual sampled points and
+the actual moment the pen lifts; the line-spacing diagram derives its gap from
+the measured ascent and descent rather than a guessed number. If the model ever
+changes, regenerate and the diagrams stay honest:
+
+```bash
+node scripts/make-figures.mjs   # rewrites src/lib/figures.ts
+node scripts/make-og-image.mjs && python3 scripts/make-og-image.py
+```
+
+Everything is inline SVG using `currentColor`, so the diagrams work in both
+themes and the page loads no images at all.
 
 `generate()` returns stroke geometry in abstract model units with the baseline
 at `y = 0` and `y` pointing up; `render.ts` flips the axis and scales it. That

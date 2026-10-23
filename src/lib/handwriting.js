@@ -9,6 +9,8 @@
  *
  * Adapted from the calligrapher.ai implementation. Reworked here to drop all
  * DOM coupling: it takes text and returns stroke geometry, nothing more.
+ *
+ * Port and API: Eeman Majumder <eeman.majumder@gmail.com>
  */
 
 /* eslint-disable */
