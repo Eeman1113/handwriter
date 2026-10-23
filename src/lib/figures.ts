@@ -256,7 +256,7 @@ export const FIGURES = {
     "descent": 42.64,
     "gap": 88,
     "labelGutter": 84,
-    "w": 377.91,
+    "w": 409.91,
     "h": 285.83
   },
   "writing": {

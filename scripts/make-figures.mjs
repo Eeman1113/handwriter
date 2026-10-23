@@ -110,7 +110,8 @@ out.hands = [0, 9, 16, 22, 40, 52, 63, 71].map((style) => {
 
   out.multiline = {
     lines, ascent: r(ascent), descent: r(descent), gap, labelGutter,
-    w: r(labelGutter + Math.max(...bs.map((b) => b.width)) * scale + pad + 30),
+    // the right margin has to hold the "line gap" label, which sits outside the writing
+    w: r(labelGutter + Math.max(...bs.map((b) => b.width)) * scale + pad + 62),
     h: r(first + gap * (made.length - 1) + descent + pad),
   };
 }
