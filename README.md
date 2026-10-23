@@ -56,6 +56,7 @@ site from a subpath. Hosting at a domain root instead? Drop that variable.
 | `src/lib/render.ts` | Lays strokes out into lines and turns them into SVG, then PNG. |
 | `src/app/page.tsx` | The interface. |
 | `src/components/Logo.tsx` | The wordmark — written by the engine, baked at a fixed seed. |
+| `src/app/icon.svg` | Favicon: a handwritten `h`, also engine-made. |
 | `public/d.bin` | Model weights (2.5 MB). |
 
 The logo is not set in a typeface: it is the word *handwriter* run through the
@@ -63,6 +64,16 @@ same network, frozen at style 9 / seed 3 so it looks identical on every visit
 and never waits on the model to load. Its strokes use `currentColor`, so it is
 black on light and white on dark. Regenerate it with
 `node scripts/make-logo.mjs`.
+
+The favicon is the same idea — a handwritten `h` rather than a letterform from
+a font. `icon.svg` carries its own `prefers-color-scheme` rule, so it is dark
+on light tab bars and light on dark ones. The iOS touch icon cannot be
+transparent, so it gets a solid ink tile instead:
+
+```bash
+node scripts/make-icon.mjs        # writes src/app/icon.svg
+python3 scripts/make-apple-icon.py  # then src/app/apple-icon.png (needs Pillow)
+```
 
 `generate()` returns stroke geometry in abstract model units with the baseline
 at `y = 0` and `y` pointing up; `render.ts` flips the axis and scales it. That

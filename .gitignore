@@ -5,3 +5,6 @@ out/
 next-env.d.ts
 .DS_Store
 .env*.local
+
+# intermediate handed from make-icon.mjs to make-apple-icon.py
+scripts/.icon-geometry.json

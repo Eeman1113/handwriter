@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<style>
+path { stroke: #16161a }
+@media (prefers-color-scheme: dark) { path { stroke: #ededea } }
+</style>
+<path d="M9 11.15L9.25 13.03L9.39 15.91L9.51 19.74L9.5 24.09L9.53 28.93L9.53 34.09L9.55 39.22L9.56 43.83L9.62 47.46L9.72 49.71L9.88 50.04L10.15 48.63L10.41 46.16L10.98 43.12L11.93 40.01L13.4 37.07L15.52 34.48L18.22 32.22L21.49 30.63L25.08 29.72L28.8 29.63L32.49 30.3L36.05 31.84L39.3 33.99L42.25 36.71L44.74 39.8L46.76 43L48.42 46.15L49.74 49.1L51.01 51.39L52.32 52.51L53.49 52.85L54.35 52.69L55 52.3" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
